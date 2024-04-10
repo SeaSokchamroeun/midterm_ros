@@ -1,0 +1,315 @@
+<?xml version="1.0"?>
+
+<robot name="sliding_arm">
+
+	
+    <link  name= "world"></link>
+
+
+    <joint name="base_joint" type="fixed">
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <parent link="world"/>
+        <child link="base_link"/>
+        
+    </joint>
+
+
+ 	<link name="base_link">
+		<visual>
+		    <origin xyz="0 0 0.1" rpy="0 0 0"/>
+			<geometry>
+				<box size="2 1 0.13"/>
+			</geometry>
+			<material name="Cyan1">
+	       		<color rgba="0 0.9 0.9 1.0"/>
+	     	</material>
+		</visual>	
+		<collision>
+		<origin xyz="0 0 0" rpy="0 0 0"/>
+		<geometry>
+		<box size="2 1 0.3"/>
+		</geometry>
+		</collision>
+		<inertial>
+		<origin xyz="0 0 0" rpy="0 0 0"/>
+		<mass value="2"/>
+		<inertia
+		ixx="0.1" ixy="0.0" ixz="0.0"
+		iyy="0.1" iyz="0.0"
+		izz="0.1"/>
+		</inertial>
+</link>
+
+
+    <joint name="slider_joint" type="prismatic">
+        <origin xyz="-0.75 0 0.1" rpy="0 0 0"/>
+        <parent link="base_link"/>
+        <child link="slider_link"/>
+        <axis xyz="1 0 0"/>
+        <limit lower="0" upper="0.75" velocity="100" effort="100"/> 
+    </joint>
+
+  	<link name="slider_link">
+		<visual>
+		    <origin xyz="0 0 0.1" rpy="0 0 0"/>
+			<geometry>
+				<box size="0.5 0.5 0.15"/>
+			</geometry>
+			<material name="yellow">
+	       		<color rgba="1 1 0 1"/>
+	     	</material>
+		</visual>	
+		<collision>
+		<origin xyz="0 0 0" rpy="0 0 0"/>
+		<geometry>
+		<box size="0.5 0.5 0.3"/>
+		</geometry>
+		</collision>
+		<inertial>
+		<origin xyz="0 0 0" rpy="0 0 0"/>
+		<mass value="1.45"/>
+		<inertia
+		ixx="0.1" ixy="0.0" ixz="0.0"
+		iyy="0.1" iyz="0.0"
+		izz="0.1"/>
+		</inertial>
+</link>
+
+
+    <joint name="rotating_joint" type="revolute">
+        <origin xyz="0 0 0.1" rpy="0 0 0"/>
+        <parent link="slider_link"/>
+        <child link="rotating_link"/>
+        <axis xyz="0 0 1"/>
+        <limit effort="1000.0" lower="-1.40" upper="1.40" velocity="0.5"/>
+    </joint>
+
+  	<link name="rotating_link">
+		<visual>
+		    <origin xyz="0 0 0.35" rpy="0 0 0"/>
+			<geometry>
+				<cylinder radius="0.2" length="0.7"/>
+			</geometry>
+			<material name="Cyan1">
+	       		<color rgba="0 0.9 0.9 1.0"/>
+	     	</material>
+		</visual>	
+		<collision>
+		<origin xyz="0 0 0" rpy="0 0 0"/>
+		<geometry>
+		<box size="0.2 0.2 0.15"/>
+		</geometry>
+		</collision>
+		<inertial>
+		<origin xyz="0 0 0" rpy="0 0 0"/>
+		<mass value="1"/>
+		<inertia
+		ixx="0.1" ixy="0.0" ixz="0.0"
+		iyy="0.1" iyz="0.0"
+		izz="0.1"/>
+		</inertial>
+</link>
+
+    <joint name="joint1_joint" type="revolute">
+        <axis xyz="0 1 0"/>
+        <limit effort="1000.0" lower="0" upper="1.0472" velocity="0.5"/>
+        <origin rpy="0 0 0" xyz="0 0 0.8"/>
+        <parent link="rotating_link"/>
+        <child link="link1"/>
+    </joint>
+
+
+
+ 	<link name="link1">
+		<visual>
+		    <origin xyz="0 0 0" rpy="1.57079633 0 0"/>
+			<geometry>
+				<cylinder radius="0.2" length="0.2"/>
+			</geometry>
+			<material name="Black1">
+	       		<color rgba="0.2 0.2 0.2 1.0"/>
+	     	</material>
+		</visual>	
+
+    <collision>
+		<origin xyz="0 0 0.1" rpy="1.57079633 0 0"/>
+		<geometry>
+		<cylinder radius="0.2" length="0.3"/>
+		</geometry>
+	</collision>
+		<inertial>
+		    <origin xyz="0 0 0" rpy="0 0 0"/>
+		    <mass value="0.5"/>
+    		<inertia
+		        ixx="0.1" ixy="0.0" ixz="0.0"
+		        iyy="0.1" iyz="0.0"
+		        izz="0.1"/>
+        </inertial>
+	</link>
+
+  
+
+    <joint name="rotating2_joint" type="revolute">
+        <origin xyz="0 0 0.25" rpy="0 0 0"/>
+        <parent link="link1"/>
+        <child link="rotating2_link"/>
+        <axis xyz="0 0 1"/>
+        <limit effort="1000.0" lower="-1" upper="1" velocity="0.5"/>
+    </joint>
+
+  	<link name="rotating2_link">
+		<visual>
+		    <origin xyz="0 0 0.1" rpy="0 0 0"/>
+			<geometry>
+				<cylinder radius="0.15" length="0.4"/>
+			</geometry>
+			<material name="Cyan1">
+	       		<color rgba="0 0.9 0.9 1.0"/>
+	     	</material>
+		</visual>	
+		<collision>
+		<origin xyz="0 0 0" rpy="0 0 0"/>
+		<geometry>
+		<box size="0.2 0.2 0.15"/>
+		</geometry>
+		</collision>
+		<inertial>
+		<origin xyz="0 0 0" rpy="0 0 0"/>
+		<mass value="0.4"/>
+		<inertia
+		ixx="0.1" ixy="0.0" ixz="0.0"
+		iyy="0.1" iyz="0.0"
+		izz="0.1"/>
+		</inertial>
+</link>
+
+    <joint name="joint3_joint" type="revolute">
+        <axis xyz="0 1 0"/>
+        <limit effort="1000.0" lower="-1.0472" upper="2" velocity="0.5"/>
+        <origin rpy="0 0 0" xyz="0 0 0.4"/>
+        <parent link="rotating2_link"/>
+        <child link="link2"/>
+    </joint>
+
+
+
+ 	<link name="link2">
+		<visual>
+		    <origin xyz="0 0 0" rpy="1.57079633 0 0"/>
+			<geometry>
+				<cylinder radius="0.2" length="0.2"/>
+			</geometry>
+			<material name="Black1">
+	       		<color rgba="0.2 0.2 0.2 1.0"/>
+	     	</material>
+		</visual>	
+
+    <collision>
+		<origin xyz="0 0 0" rpy="1.57079633 0 0"/>
+		<geometry>
+		<cylinder radius="0.2" length="0.3"/>
+		</geometry>
+	</collision>
+		<inertial>
+		    <origin xyz="0 0 0" rpy="0 0 0"/>
+		    <mass value="0.3"/>
+    		<inertia
+		        ixx="0.1" ixy="0.0" ixz="0.0"
+		        iyy="0.1" iyz="0.0"
+		        izz="0.1"/>
+        </inertial>
+	</link>
+
+	<joint name="cam_link" type="fixed">
+        <origin rpy="0 -1.57 0" xyz="0 0 0.25"/>
+        <parent link="link2"/>
+        <child link="camera_link"/>
+    </joint>
+
+ 	<link name="camera_link">
+		<visual>
+		    <origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+				<box size="0.12 0.12 0.1"/> 
+			</geometry>
+			<material name="Yellow">
+	       		<color rgba="1 1 0 1"/>
+	     	</material>
+		</visual>	
+		
+
+    <collision>
+		<origin xyz="0 0 0" rpy="0 0 0"/>
+		<geometry>
+		<box size="0.12 0.12 0.1"/>
+		</geometry>
+	</collision>
+		<inertial>
+		    <origin xyz="0 0 0" rpy="0 0 0"/>
+		    <mass value="0.05"/>
+    		<inertia
+		        ixx="0.1" ixy="0.0" ixz="0.0"
+		        iyy="0.1" iyz="0.0"
+		        izz="0.1"/>
+        </inertial>
+	</link>
+
+	<gazebo>
+    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+      <robotNamespace>/rrbot</robotNamespace>
+      <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
+    </plugin>
+  </gazebo>
+
+  <!-- camera -->
+  <gazebo reference="camera_link">
+    <sensor type="camera" name="camera1">
+      <visualize>true</visualize>
+      <update_rate>30.0</update_rate>
+      <camera name="head">
+        <horizontal_fov>1.3962634</horizontal_fov>
+        <image>
+          <width>800</width>
+          <height>800</height>
+          <format>R8G8B8</format>
+        </image>
+        <clip>
+          <near>0.02</near>
+          <far>300</far>
+        </clip>
+        <noise>
+          <type>gaussian</type>
+          <!-- Noise is sampled independently per pixel on each frame.
+               That pixel's noise value is added to each of its color
+               channels, which at that point lie in the range [0,1]. -->
+          <mean>0.0</mean>
+          <stddev>0.007</stddev>
+        </noise>
+      </camera>
+      <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+        <alwaysOn>true</alwaysOn>
+        <updateRate>0.0</updateRate>
+        <cameraName>rrbot/camera1</cameraName>
+        <imageTopicName>image_raw</imageTopicName>
+        <cameraInfoTopicName>camera_info</cameraInfoTopicName>
+        <frameName>camera_link</frameName>
+        <!-- setting hackBaseline to anything but 0.0 will cause a misalignment
+            between the gazebo sensor image and the frame it is supposed to
+            be attached to -->
+        <hackBaseline>0.0</hackBaseline>
+        <distortionK1>0.0</distortionK1>
+        <distortionK2>0.0</distortionK2>
+        <distortionK3>0.0</distortionK3>
+        <distortionT1>0.0</distortionT1>
+        <distortionT2>0.0</distortionT2>
+        <CxPrime>0</CxPrime>
+        <Cx>0.0</Cx>
+        <Cy>0.0</Cy>
+        <focalLength>0.0</focalLength>
+      </plugin>
+    </sensor>
+  </gazebo>
+
+
+
+</robot>
