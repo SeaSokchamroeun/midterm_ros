@@ -1,3 +1,4 @@
+
 cmake_minimum_required(VERSION 3.0.2)
 project(robot_arm_pkg)
 
@@ -14,7 +15,8 @@ find_package(catkin REQUIRED COMPONENTS
   rviz
   tf2
   urdf
-)
+  controller_manager  
+  )
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
